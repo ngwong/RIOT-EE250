@@ -229,6 +229,8 @@ void print_rss(msg_t *msg)
 
         /**** TO-DO ****/
 
+        
+
         /** 
          * gnrc_netif_hdr_t has information about the signal quality. The RSS 
          * value is equal to the RSSI from 'hdr' minus CC2538_RSSI_OFFSET You 
@@ -244,7 +246,7 @@ void print_rss(msg_t *msg)
 void print_prr(uint32_t pkt_rcv, uint32_t num_pkts)
 {
     /**** TO-DO ****/
-
+    
     /** 
      *You know the number of packets you were supposed to receive and the number
      * of packets you actually received. Calculate the Packet Reception Ratio 
