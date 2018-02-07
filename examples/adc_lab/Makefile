@@ -11,7 +11,7 @@ PROGRAMMER ?= cc2538-bsl
 RIOTBASE ?= $(CURDIR)/../..
 
 FEATURES_REQUIRED = periph_adc
-FEATURES_REQUIRED = periph_gpio 
+FEATURES_REQUIRED += periph_gpio 
 
 USEMODULE += xtimer
 

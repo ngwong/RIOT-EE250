@@ -93,7 +93,6 @@ int adc_sample(adc_t line, adc_res_t res)
 
     // Sets output port to be on, signifies sampling about to start
     gpio_set(GPIO_PIN(PORT_D, 2));
-    printf("The GPIO PIN Value (after set) is %d", gpio_read(GPIO_PIN(PORT_D, 2)));
 
     /* Poll/wait until end of conversion */
     while ((adca->cc2538_adc_adccon1.ADCCON1 &
@@ -101,8 +100,6 @@ int adc_sample(adc_t line, adc_res_t res)
 
     // Clears output port, signifies sampling is complete
     gpio_clear(GPIO_PIN(PORT_D, 2));
-    printf("The GPIO PIN Value (after clear) is %d", gpio_read(GPIO_PIN(PORT_D, 2)));
-
 
     /* Read result after conversion completed,
      * reading SOC_ADC_ADCH last will clear SOC_ADC_ADCCON1.EOC */
