@@ -23,6 +23,7 @@
 #include "xtimer.h"
 #include "timex.h"
 #include "periph/adc.h"
+#include "periph/gpio.h"
 
 /**
  * ADC_RES_#BIT is defined in many possible places depending on ADC's supported 

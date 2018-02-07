@@ -26,6 +26,8 @@
 #include "periph_cpu.h"
 #include "periph/adc.h"
 
+#include "periph/gpio.h"
+
 #define ENABLE_DEBUG (0)
 #include "debug.h"
 
@@ -43,6 +45,9 @@ int adc_init(adc_t line)
     adca->ADCCON2 = 0x0;
     /* configure ADC GPIO as analog input */
     gpio_init(adc_config[line], GPIO_IN_ANALOG);
+
+    //Initialize GPIO Pin to be Output
+    gpio_init(GPIO_PIN(PORT_D, 2), GPIO_OUT);
 
     return 0;
 }
@@ -86,9 +91,18 @@ int adc_sample(adc_t line, adc_res_t res)
     DEBUG("ADCCON1: %"PRIu32" ADCCON2: %"PRIu32" ADCCON3: %"PRIu32"\n",
           adca->cc2538_adc_adccon1.ADCCON1, adca->ADCCON2, adca->ADCCON3);
 
+    // Sets output port to be on, signifies sampling about to start
+    gpio_set(GPIO_PIN(PORT_D, 2));
+    printf("The GPIO PIN Value (after set) is %d", gpio_read(GPIO_PIN(PORT_D, 2)));
+
     /* Poll/wait until end of conversion */
     while ((adca->cc2538_adc_adccon1.ADCCON1 &
             SOC_ADC_ADCCON1_EOC_MASK) == 0) {}
+
+    // Clears output port, signifies sampling is complete
+    gpio_clear(GPIO_PIN(PORT_D, 2));
+    printf("The GPIO PIN Value (after clear) is %d", gpio_read(GPIO_PIN(PORT_D, 2)));
+
 
     /* Read result after conversion completed,
      * reading SOC_ADC_ADCH last will clear SOC_ADC_ADCCON1.EOC */

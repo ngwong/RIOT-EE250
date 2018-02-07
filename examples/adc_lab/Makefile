@@ -11,6 +11,8 @@ PROGRAMMER ?= cc2538-bsl
 RIOTBASE ?= $(CURDIR)/../..
 
 FEATURES_REQUIRED = periph_adc
+FEATURES_REQUIRED = periph_gpio 
+
 USEMODULE += xtimer
 
 # Comment this out to disable code in RIOT that does safety checking
